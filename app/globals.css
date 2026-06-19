@@ -2,26 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=EB+Garamond:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap');
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --void: #0b1024;
+  --void-2: #10162f;
+  --parchment: #efe6d2;
+  --brass: #ad8a4d;
+  --brass-dark: #8a6a34;
+  --oxblood: #7a2e2e;
+  --ink: #2b2418;
+  --starlight: #f4efe3;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(ellipse at 50% -10%, var(--void-2), var(--void) 60%);
+  font-family: 'EB Garamond', serif;
+  color: var(--starlight);
+  position: relative;
+  overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7) sepia(1) saturate(2) hue-rotate(5deg);
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.7) sepia(1) saturate(2) hue-rotate(5deg);
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.85; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star { animation: none; opacity: 0.4; }
+}
+
+.star {
+  position: absolute;
+  background: var(--starlight);
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+@keyframes shootingStar {
+  0% { opacity: 0.9; transform: translateX(0) translateY(0) rotate(-45deg); }
+  100% { opacity: 0; transform: translateX(-300px) translateY(300px) rotate(-45deg); }
+}
+.shooting-star {
+  position: fixed;
+  width: 80px;
+  height: 1.5px;
+  background: linear-gradient(to left, transparent, rgba(255,255,255,0.9) 60%, transparent);
+  animation: shootingStar 0.7s ease-out forwards;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cert-blurred {
+  filter: blur(10px);
+  transition: filter 0.5s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+.cert-revealed {
+  filter: none;
+  transition: filter 0.5s ease;
 }

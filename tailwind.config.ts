@@ -9,8 +9,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        void: "#0b1024",
+        "void-2": "#10162f",
+        parchment: "#efe6d2",
+        brass: "#ad8a4d",
+        "brass-dark": "#8a6a34",
+        oxblood: "#7a2e2e",
+        ink: "#2b2418",
+        starlight: "#f4efe3",
+      },
+      fontFamily: {
+        fraunces: ["Fraunces", "serif"],
+        garamond: ["EB Garamond", "serif"],
+        mono: ["JetBrains Mono", "monospace"],
       },
     },
   },
