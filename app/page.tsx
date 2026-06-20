@@ -199,6 +199,7 @@ export default function Home() {
           <PricingCard
             label="Digital copy"
             price="₹599"
+            originalPrice="₹999"
             desc="High-res PDF delivered to your inbox within 24 hours"
             buttonLabel="Get Digital Copy"
             onOrder={() => setShowDownload(true)}
@@ -206,6 +207,7 @@ export default function Home() {
           <PricingCard
             label="Framed print"
             price="₹999"
+            originalPrice="₹2,000"
             desc="A4 · 200GSM matte · delivered to your door"
             buttonLabel="Order the Print"
             onOrder={() => certData ? setShowCheckout(true) : document.getElementById("name")?.focus()}
@@ -310,8 +312,8 @@ export default function Home() {
 
 /* ── Sub-components ── */
 
-function PricingCard({ label, price, desc, buttonLabel, onOrder, highlighted }: {
-  label: string; price: string; desc: string; buttonLabel: string; onOrder: () => void; highlighted?: boolean;
+function PricingCard({ label, price, originalPrice, desc, buttonLabel, onOrder, highlighted }: {
+  label: string; price: string; originalPrice?: string; desc: string; buttonLabel: string; onOrder: () => void; highlighted?: boolean;
 }) {
   return (
     <div style={{
@@ -329,7 +331,12 @@ function PricingCard({ label, price, desc, buttonLabel, onOrder, highlighted }: 
       )}
       <p className="font-fraunces text-[10px] tracking-[0.2em] uppercase mb-2"
         style={{ color: highlighted ? "var(--brass-dark)" : "var(--brass)", opacity: highlighted ? 1 : 0.7 }}>{label}</p>
-      <p className="font-fraunces text-[32px] mb-1" style={{ color: highlighted ? "var(--ink)" : "var(--starlight)" }}>{price}</p>
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "center", gap: 8, marginBottom: 4 }}>
+        {originalPrice && (
+          <span style={{ fontFamily: "EB Garamond, serif", fontSize: 18, opacity: 0.4, textDecoration: "line-through", color: highlighted ? "var(--ink)" : "var(--starlight)" }}>{originalPrice}</span>
+        )}
+        <p className="font-fraunces text-[32px]" style={{ color: highlighted ? "var(--ink)" : "var(--starlight)", margin: 0 }}>{price}</p>
+      </div>
       <p style={{ fontFamily: "EB Garamond, serif", fontSize: 13, opacity: 0.65, marginBottom: 20, lineHeight: 1.5 }}>{desc}</p>
       <SealButton wide onClick={onOrder} variant={highlighted ? "primary" : "secondary"}>{buttonLabel}</SealButton>
     </div>
